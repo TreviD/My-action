@@ -174,7 +174,7 @@ jobs:
       run: |
         cd bin
         zip -r -o -q -9  mt7621-Package.zip . -i *.ipk
-        move mt7621-Package.zip "/opt/images/"
+        mv mt7621-Package.zip "/opt/images/"
         
     - name: Only Upload firmware (Without packages)
       uses: actions/upload-artifact@v2
@@ -188,7 +188,7 @@ jobs:
       run: |
         cd bin/targets/*/*
         zip -r -o -q -9 mt7621.zip . -i *.bin
-        move mt7621.zip "/opt/images/"
+        mv mt7621.zip "/opt/images/"
        
     - name: Create Release
       id: create_release
