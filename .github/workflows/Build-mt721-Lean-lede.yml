@@ -47,21 +47,22 @@ jobs:
       run: |
         cd bin
         zip -r -o -q -9  mt7621-Package.zip . -i *.ipk
-        mv mt7621-Package.zip "/opt/images/"
-        
-    - name: Only Upload firmware (Without packages)
-      uses: actions/upload-artifact@v2
-      if: always()
-      with:
-        name: mt7621
-        path: lede/bin/targets/*/*
+        mkdir /tmp/images/
+        mv mt7621-Package.zip "/tmp/images/"
     
     - name: zipAndMoveFiles
       if: success()
       run: |
         cd bin/targets/*/*
         zip -r -o -q -9 mt7621.zip . -i *.bin
-        mv mt7621.zip "/opt/images/"
+        mv mt7621.zip "/tmp/images/"
+
+    - name: Only Upload firmware (Without packages)
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: mt7621
+        path: /tmp/images/*
        
     - name: Create Release
       id: create_release
@@ -69,7 +70,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        artifacts: "/opt/images/*.*"
+        artifacts: "/tmp/images/*.*"
         allowUpdates: true 
         commit: master 
         tag: mt7621_test
