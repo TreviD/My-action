@@ -1,4 +1,4 @@
-name: Build-mt7621-Lean-lede
+name: Build-mt7621-redmi-ac2100-Lean-lede
 on:
   workflow_dispatch:
   # push:
