@@ -26,7 +26,7 @@ jobs:
 
     - name: Get_Release_Version
       run: |
-        echo "::set-env name=MERLIN_TAG::$(git show-ref --heads --hash=8)"
+        echo "MERLIN_TAG=$(git show-ref --heads --hash=8)" >> $GITHUB_ENV
 
     - name: Download and Load custom configuration
       run: |
