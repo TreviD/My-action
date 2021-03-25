@@ -7,7 +7,7 @@ on:
   #   paths:
   #     -  'lean-lede/x86_64/.config'
   schedule:
-        - cron: 0 */6 * * *
+        - cron: 0 0 */1 * *
 
 jobs:
   MT7621:
@@ -23,7 +23,11 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: coolsnowwolf/lede
-        
+
+    - name: Get_Release_Version
+      run: |
+        echo "::set-env name=MERLIN_TAG::$(git show-ref --heads --hash=8)"
+
     - name: Download and Load custom configuration
       run: |
         curl -fsSL https://raw.githubusercontent.com/trevid/My-action/master/lean-lede/mt7621-redmi-ac2100/.config >.config
@@ -75,7 +79,7 @@ jobs:
         artifacts: "/tmp/images/*.*"
         allowUpdates: true 
         commit: master 
-        tag: mt7621-redmi-ac2100_test
+        tag: mt7621-redmi-ac2100-lede_${{ env.MERLIN_TAG }}
         body: |
           this is only a latest build from mainline
         token: ${{ secrets.GITHUB_TOKEN }}
