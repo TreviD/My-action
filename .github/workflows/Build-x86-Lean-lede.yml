@@ -59,8 +59,8 @@ jobs:
     - name: zipAndMoveFiles
       if: success()
       run: |
-        cd bin/targets/*/*
-        zip -r -o -q -9 x86_64-lede.zip . -i *.bin
+        cd bin/targets/
+        zip -r -o -q -9 x86_64-lede.zip .
         mv  x86_64-lede.zip "/tmp/images/"
 
     - name: Only Upload firmware (Without packages)
