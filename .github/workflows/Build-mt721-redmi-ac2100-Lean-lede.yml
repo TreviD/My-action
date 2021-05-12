@@ -59,8 +59,8 @@ jobs:
     - name: zipAndMoveFiles
       if: success()
       run: |
-        cd bin/targets/*/*
-        zip -r -o -q -9 mt7621-redmi-ac2100.zip . -i *.bin
+        cd bin/targets/
+        zip -r -o -q -9 mt7621-redmi-ac2100.zip . 
         mv  mt7621-redmi-ac2100.zip "/tmp/images/"
 
     - name: Only Upload firmware (Without packages)
