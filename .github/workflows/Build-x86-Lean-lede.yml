@@ -30,7 +30,7 @@ jobs:
 
     - name: Download and Load custom configuration
       run: |
-        curl -fsSL https://raw.githubusercontent.com/trevid/My-action/master/lean-lede/x86_64/.config >.config
+        curl -fsSL https://raw.githubusercontent.com/trevid/My-action/master/lean-lede/x86_64_custom/.config >.config
         bash <(curl -fsSL https://raw.githubusercontent.com/trevid/My-action/master/lean-lede/diy.sh)
         make defconfig
         
